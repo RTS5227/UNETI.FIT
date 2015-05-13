@@ -1,0 +1,34 @@
+﻿@model IEnumerable<UNETI.FIT.Areas.SubjectManager.Models.Entity.Confirm>
+
+
+<input type="checkbox" id="dropdown-messager" class="hidden" />
+<label for="dropdown-messager">
+    <span class="glyphicon glyphicon-comment"></span>
+    <span class="label label-success">@Model.Count()</span>
+</label>
+<ul class="dropdown-menu dropdown-menu-right">
+    <li class="header">You have @Model.Count() messager</li>
+    <li>
+        <ul class="menu" style="overflow: hidden; width: 100%;">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <!-- start message -->
+                    <div tabindex="-1" style="padding: 10px 5px;" class="clearfix">
+                        <div class="messager-wrapper pull-left clearfix">
+                            <div class="pull-left">
+                                <img src="/content/upload/@item.Student.Avatar" class="img-round" width="45" height="45">
+                            </div>
+                            <h4>@item.Student.FullName</h4>
+                            <p>@item.Student.FullName đã yêu cầu tham gia đồ án @item.Subject.Title vào ngày @item.CreateAt.ToShortDateString()</p>
+                        </div>
+                        <div class="btn-xacnhan pull-right clearfix">
+                            @Html.ActionLink("Accept", "Accept", new { id = item.ID })
+                            @Html.ActionLink("Deny", "Deny", new { id = item.ID })
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </li>
+</ul>

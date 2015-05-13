@@ -1,0 +1,36 @@
+﻿<div class="taikhoan">
+
+    <ul>
+        @if (Request.IsAuthenticated)
+        {
+            if (User.IsInRole("admin"))
+            {
+            <li>
+                <a class="username" href="/admin">@User.Identity.Name</a>
+            </li>
+            }
+            if (User.IsInRole("student"))
+            {
+                Html.RenderAction("StudentCP", "subject");
+            }
+            else if (User.IsInRole("teacher"))
+            {
+                Html.RenderAction("TeacherCP", "subject");
+            }
+            <li class="lithoat">
+                @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a class="halo" href="javascript:document.getElementById('logoutForm').submit()">thoát</a>
+                }
+            </li>
+        }
+        else
+        {
+            <a class="login-window" href="#login-box">Đăng Nhập</a>
+        }
+    </ul>
+</div>
+
+
+

@@ -1,0 +1,8 @@
+﻿@model int
+
+@{
+    var db = new UNETI.FIT.Infrastructure.ApplicationDBContext();
+    var lop = db.LevelsOfTraining.Find(Model);
+}
+
+@lop.Name

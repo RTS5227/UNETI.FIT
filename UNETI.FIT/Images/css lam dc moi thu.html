@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2014 by ltlam93 (http://jsbin.com/sodokapajo/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+body *{
+  font-family: Helvetica;  
+}
+body{
+  background: #F7F7F7;
+}
+
+/*-----------MODAL---------------*/
+
+#btn{
+  display: none;
+}
+.modal-content{
+  display: none;
+}
+label[for="btn"]:after{
+  content: 'Click on me';
+}
+
+label[for="btn"]{
+  padding: 10px 15px;      
+  display: inline-block;
+  background: #6A7C9A;
+  color: #fff;
+  text-shadow: 0px 0px 0px #6A7C9A;
+  font-size: 15px;
+  line-height: 20px;
+  cursor: pointer;  
+  margin-bottom: 20px;
+}
+
+#btn:checked ~ .modal{ 
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  padding: 20px 20px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.5);
+}
+
+#btn:checked ~ .modal .modal-content{
+  display: block;
+}
+
+#btn:checked ~ .modal .modal-inner{
+  position: relative;
+  width: 450px;
+  height: 300px;  
+  top: 25%;
+  margin: auto;
+  background: #fff;  
+  padding: 20px 10px;
+  font-size: 14px;
+  line-height: 20px;
+}
+#btn:checked ~ .modal .modal-x:after{
+  content: '×';
+  font-size: 25px;
+}
+#btn:checked ~ .modal .modal-x{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  left: initial;
+  color: red;
+  background: transparent;
+  box-shadow: none;
+  padding: 7px 12px;
+}
+
+
+/*-----------TABS---------------*/
+.tab-links{overflow: hidden;}
+.tab-links label{
+  padding: 10px 15px;;
+  display: block;
+  float: left;
+  background: #fff;
+  cursor: pointer;
+}
+
+.tab-detail{
+  padding: 10px 15px;
+  background: #fff;
+}
+.tab-detail, .tab-control{
+  display: none;
+}
+
+.tab-links label[for]{
+  background: #6A7C9A;
+  color: #fff;
+}
+
+#tab1:checked ~ .tab-links label[for="tab1"],
+#tab2:checked ~ .tab-links label[for="tab2"],
+#tab3:checked ~ .tab-links label[for="tab3"]{
+  background: #fff;
+  color: #000;
+}
+
+#tab1:checked ~ .tab-content .tab-dt1,
+#tab2:checked ~ .tab-content .tab-dt2,
+#tab3:checked ~ .tab-content .tab-dt3{
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.tab-content, .tab-links, .modal-x{
+  box-shadow: -2px 2px 2px rgba(0,0,0,.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+  <!-- ========= MODAL ============= -->
+  <input type="checkbox" id="btn"/>
+  <div class="modal">        
+    <div class="modal-inner">
+      <label class="modal-x" for="btn"></label>
+      <div class="modal-content">        
+        <h4>Reveal Modal Goodness</h4>
+        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus augue lorem, malesuada et diam sed, tincidunt tempus ante. Phasellus hendrerit euismod nisi nec consectetur. Aliquam erat volutpat. Nam iaculis lectus non pulvinar pulvinar. Aliquam sed varius orci.</p>
+      </div>      
+    </div>
+  </div>  
+
+    
+  <!-- ========= TABS ============== -->  
+  
+  <input type="radio" name="tab" checked class="tab-control" id="tab1" />
+  <input type="radio" name="tab" class="tab-control" id="tab2" />
+  <input type="radio" name="tab" class="tab-control" id="tab3" />
+  
+  <div class="tab-links">
+    <label for="tab1">Tab 1</label>
+    <label for="tab2">Tab 2</label>
+    <label for="tab3">Tab 3</label>
+  </div>
+  
+  <div class="tab-content">
+    <div class="tab-detail tab-dt1">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+      <p>Proin elementum massa vel dolor vulputate interdum. Donec ac varius neque. Curabitur pretium mollis est ac pretium. Fusce luctus est id venenatis scelerisque. Sed sed eros dictum, sollicitudin libero nec, ornare ante. Mauris quis sem lectus</p>
+    </div>
+    <div class="tab-detail tab-dt2">
+      <p>Cras dui nisl, pulvinar quis viverra sed, tincidunt vel nulla. Phasellus sem neque, imperdiet non tincidunt vitae, vestibulum at neque. Aliquam erat volutpat. Nunc porttitor rhoncus turpis sed finibus. Phasellus sit amet mi magna.</p>
+    </div>
+    <div class="tab-detail tab-dt3">
+      <p>In interdum eleifend ante, ac porta arcu iaculis quis</p>
+      <p>Nulla condimentum sapien non tristique volutpat. Donec vel nulla mi. Etiam tellus mi, congue id mollis nec, varius id ante. Curabitur pellentesque ipsum sem, quis venenatis purus scelerisque non. Proin lectus nisl, fringilla quis ultricies sed, molestie ac turpis. </p>
+      <p>Fusce sollicitudin non elit sed mattis. Praesent vel libero placerat, pharetra tellus dictum, tempus est. Quisque porta sed ipsum ut mollis</p>
+    </div>
+  </div>
+  
+</body>
+</html>

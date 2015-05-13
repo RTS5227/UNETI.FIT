@@ -1,0 +1,37 @@
+﻿@model IEnumerable<UNETI.FIT.Models.ViewModels.CategoryViewModel>
+
+@foreach (var c in Model)
+{
+    <div class="category" id="@c.Name">
+        <h3>@Resources.Resource.ResourceManager.GetString(c.Name)</h3>
+
+        <div class="col-lg-6 list-group moinhat">
+            @if (c.Articles.Count() > 0)
+            {
+                var item = c.Articles.First();
+                <img src="/content/upload/@item.Thumbnail" width="100%" height="200" />
+                <div class="thumbbody">
+                    <strong>
+                        <a href="@Url.Action("Details", "home", new { id = item.ID })">@item.Title</a>
+                    </strong>
+                    <p>
+                        @Saber.Truncate(item.Content, 300)
+                    </p>
+                </div>
+            }
+        </div>
+
+        <ul class="col-lg-6 list-group">
+            @foreach (var item in c.Articles.Skip(1))
+            {
+                <li class="list-group-item">
+                    <img src="/content/upload/@item.Thumbnail" />
+                    <strong>
+                        <a href="@Url.Action("Details", "home", new { id = item.ID })">@item.Title</a>
+                    </strong>
+                </li>
+            }
+        </ul>
+
+    </div>
+}

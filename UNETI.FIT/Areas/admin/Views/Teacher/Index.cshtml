@@ -1,0 +1,32 @@
+﻿@model UNETI.FIT.Models.ViewModels.ListViewModelBase<UNETI.FIT.Areas.SubjectManager.Models.Entity.Teacher>
+@{
+    ViewBag.Title = Resources.Resource.ListTeacherManager;
+}
+
+
+@section navbar{
+    <li class="active">@ViewBag.Title</li>
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+        <p class="btn btn-primary">
+            @Html.ActionLink(Resources.Resource.Create, "create")
+        </p>
+        <p class="btn btn-primary">
+            @Html.ActionLink(Resources.Resource.ExportToExcel, "export")
+        </p>
+    </div>
+    <div class="box-body">
+        <!-- table -->
+        @{
+            Html.RenderPartial("_TableTeacher", Model.List);
+        }
+    </div>
+    <div class="box-footer">
+        <!--Phan Trang-->
+        @{
+            Html.RenderPartial("_Pagination", Model.Filter);
+        }
+    </div>
+</div>

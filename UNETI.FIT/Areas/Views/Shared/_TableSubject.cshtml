@@ -1,0 +1,91 @@
+﻿@using UNETI.FIT.Areas.qlda.Models.Entity
+@model Subject
+
+<table class="table table-hover table-bordered">
+	<tr id="trHome">
+        
+        <td id="tdmon"><a href="#">@Html.DisplayFor(item => item.Module.Name)</a></td>
+		
+        <td id="tdgv"><a href="@Url.Action("index", "teacher", new {id=User.Identity.Name })">@Html.DisplayFor(item => item.Teacher.FullName)</a></td>
+		
+
+
+        <td id="nbd">@Html.DisplayFor(item => item.StartAt) - @Html.DisplayFor(item => item.EndAt)</td>
+		
+        
+    </tr>
+
+    <tr>
+       
+
+        <td id="tdtendoan">@Html.DisplayFor(item => item.Title)</td>
+    </tr>
+    <tr>
+       
+
+        <td id="tdnoidung">@Html.DisplayFor(item => item.Content)</td>
+    </tr>
+    <tr>
+        
+
+        <td id="tdyeucau">@Html.DisplayFor(item => item.Require)</td>
+    </tr>
+    <tr>
+        
+
+        <td id="tdketqua">@Html.DisplayFor(item => item.Result)</td>
+    </tr>
+    
+    
+    
+    <tr>
+       
+
+        <td id="tdghichu">@Html.DisplayFor(item => item.Note)</td>
+    </tr>
+    <tr>
+        <th class="success">@Resources.Resource.GrossJoinedStudents :</th>
+
+
+
+
+
+
+
+
+        <td>@Model.Confirms.Count(a => a.Content == ConfirmEnum.Accept)</td>
+    </tr>
+	<tr class="trdssvbc">
+		<td class="tddssvbc">
+            @{
+                Html.RenderPartial("DSSV", Model.Confirms.Where(s => s.Content == ConfirmEnum.Accept));
+            }
+        </td>
+	</tr>
+
+
+
+
+
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <tr>
+            <td class="action" colspan="2">
+                @if (User.IsInRole("student") && Model.Confirms.Count(a => a.StudentID == User.Identity.Name) == 0)
+                {
+                    @Html.ActionLink(Resources.Resource.Register, "dangky", new { id = Model.ID }, new { style = "width:100%" })
+                }
+                else if (User.IsInRole("teacher"))
+                {
+                    @Html.ActionLink(Resources.Resource.Edit, "sua", new { id = Model.ID })
+                    @Html.ActionLink(Resources.Resource.Delete, "xoa", new { id = Model.ID })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

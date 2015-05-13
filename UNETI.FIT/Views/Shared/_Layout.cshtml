@@ -1,0 +1,51 @@
+﻿@using UNETI.FIT;
+@using UNETI.FIT.Models.Entity;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - @Resources.Resource.UNETI</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/Site.css")
+</head>
+<body>
+    <div class="top">
+        <div class="timenow float-left">@DateTime.Now</div>
+        <div class="game float-right">            
+            @Html.ActionLink("LOGIN", "Login", "Account")
+            &nbsp;&nbsp;&nbsp;
+            <A href="@Url.Action("ChangeLanguage", new { culture = "vi-VN" })"><img src="/images/VN.png" width="30px" height="20px" /></A>
+            <A href="@Url.Action("ChangeLanguage", new { culture = "en-US" })"><img src="/images/EN.png" width="30px" height="20px" /></A>
+        </div>
+    </div>
+    <div class="container">
+        @{Html.RenderPartial("_Header");}
+        <section id="body">
+            <div class="">
+                <div class="row row-offcanvas row-offcanvas-right">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            @RenderSection("featured", required: false)
+                            @RenderBody()
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/.col-xs-12.col-lg-9-->
+
+                    @{Html.RenderPartial("_SideBar");}
+                </div>
+                <!--/row-->
+
+            </div>
+            <!--/.container-->
+        </section>
+    </div>
+        @{Html.RenderPartial("_Footer");}
+    @Scripts.Render("~/Scripts/jquery-2.1.1.min.js")
+    @Scripts.Render("~/Content/bootstrap.min.js")
+    @Scripts.Render("~/Content/Site.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@using UNETI.FIT.Areas.SubjectManager.Models.Entity
+@model Subject
+
+<table class="table" id="tblda">
+    <tr id="trHome">
+        <td id="tdmon"><a href="#">@Html.DisplayFor(item => item.Module.Name)</a></td>
+        <td id="tdgv"><a href="@Url.Action("index", "teacher", new { id = User.Identity.Name })">@Html.DisplayFor(item => item.Teacher.FullName)</a></td>
+        <td id="nbd">@Html.DisplayFor(item => item.StartAt) - @Html.DisplayFor(item => item.EndAt)</td>
+    </tr>
+    <tr>
+        <td id="tdtendoan">@Html.DisplayFor(item => item.Title)</td>
+    </tr>
+    <tr>
+        <th class="thda">1.@Resources.Resource.Content</th>
+        <td>@Html.DisplayFor(item => item.Content)</td>
+    </tr>
+    <tr>
+        <th class="thda">2.@Resources.Resource.Goal</th>
+        <td>@Html.DisplayFor(item => item.Goal)</td>
+    </tr>
+    <tr>
+        <th class="thda">3.@Resources.Resource.Result</th>
+        <td>@Html.DisplayFor(item => item.Result)</td>
+    </tr>
+    <tr>
+        <th class="thda">4.@Resources.Resource.Note</th>
+        <td>@Html.DisplayFor(item => item.Note)</td>
+    </tr>
+    <tr class="success">
+        <th>-@Resources.Resource.Attachment :</th>
+        <td><a href="/content/upload/@Model.Attachment">@Model.Attachment</a></td>
+    </tr>
+    <tr class="success">
+        <th>-@Resources.Resource.TotalModule :</th>
+        <td>@Html.DisplayFor(item => item.TotalModules)</td>
+    </tr>
+    <tr class="success">
+        <th>-@Resources.Resource.TotalJoinedStudents :</th>
+        <td>@Model.Confirms.Count(a => a.Content == ConfirmEnum.Accept)</td>
+    </tr>
+    @{
+        Html.RenderPartial("DSSV", Model.Confirms.Where(s => s.Content == ConfirmEnum.Accept));
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <tr>
+            <td class="action" colspan="2">
+                @if (User.IsInRole("student") && Model.Confirms.Count(a => a.StudentID == User.Identity.Name) == 0)
+                {
+                    @Html.ActionLink(Resources.Resource.Register, "dangky", new { id = Model.ID }, new { style = "width:100%" })
+                }
+                else if (User.IsInRole("teacher"))
+                {
+                    @Html.ActionLink(Resources.Resource.EditSubject, "sua", new { id = Model.ID })
+                    @Html.ActionLink(Resources.Resource.DeleteSubject, "xoa", new { id = Model.ID })
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

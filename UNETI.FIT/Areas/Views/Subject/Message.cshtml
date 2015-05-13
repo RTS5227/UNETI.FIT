@@ -1,0 +1,50 @@
+﻿@model IEnumerable<UNETI.FIT.Models.Entity.Message>
+@{
+    string active = "";
+}
+
+<input type="checkbox" id="dropdown-messager" class="hidden" />
+<label for="dropdown-messager">
+    <span class="glyphicon glyphicon-comment"></span>
+    <span class="label label-success" id="ms-count">@Model.Count(a => a.IsReaded == false)</span>
+</label>
+<ul class="dropdown-menu dropdown-menu-right" style="width: 300px;">
+    <li class="header">You have <span>@Model.Count(a => a.IsReaded == false)</span> new messager</li>
+    <li>
+        <ul class="menu" style="overflow: hidden; width: 100%;">
+            @foreach (var item in Model)
+            {
+                if (item.IsReaded)
+                {
+                    active = "active";
+                }
+                <li class="@active">
+                    <!-- start message -->
+                    <div tabindex="-1" style="padding: 10px 5px;" class="clearfix">
+                        <div class="">
+                            <div class="pull-left">
+                                <img src="/content/upload/@item.Teacher.Avatar" class="img-circle" width="45" height="45">
+                            </div>
+                            <h4>@item.Teacher.FullName
+                                <small class="pull-right"><span class="glyphicon glyphicon-time"></span>@item.CreateAt.ToShortDateString()</small>
+                            </h4>
+                            <p>@item.Body</p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </li>
+</ul>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        var $count = $('#ms-count');
+        $('#dropdown-messager').click(function (e) {
+            $.get("@Url.Action("MarkAllReaded", new { uid = User.Identity.Name })", function () {
+                $count.html('0');
+            });
+        });
+    });
+</script>

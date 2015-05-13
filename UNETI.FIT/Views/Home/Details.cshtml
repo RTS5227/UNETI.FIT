@@ -1,0 +1,23 @@
+﻿@model UNETI.FIT.Models.Entity.Article
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<section class="content">
+    <article>
+        <h2>@Html.DisplayFor(model => model.Title)</h2>
+        <div class="metadata">
+            <div>Viết bởi: admin - @Html.DisplayFor(model => model.CreateAt)</div>
+            <div>Tình trạng: @Resources.Resource.ResourceManager.GetString(Model.Status.ToString())</div>
+            <div>Lượt xem: @Html.DisplayFor(model => model.View)</div>
+        </div>
+        <p>@Html.Raw(Server.HtmlDecode(Model.Content))</p>
+
+        @if (Model.UpdateAt != null)
+        {
+            <div>Cập Nhật: @Html.DisplayFor(model => model.UpdateAt)</div>
+            <div>Tags: @Html.DisplayFor(model => model.Tags)</div>
+        }
+        <hr />
+    </article>
+</section>

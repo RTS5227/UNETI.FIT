@@ -1,0 +1,16 @@
+﻿@using System.Text.RegularExpressions;
+@helper Truncate(string input, int length)
+{
+    if (input != null && input.Length > 0)
+    {
+        input = Regex.Replace(Server.HtmlDecode(input), @"<[^>]*>", String.Empty);
+        if (input.Length < length)
+        {
+            @input
+        }
+        else
+        {
+            @input.Substring(0, length)<text>...</text>
+        }
+    }
+}

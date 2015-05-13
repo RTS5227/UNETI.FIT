@@ -1,0 +1,15 @@
+﻿@model IEnumerable<UNETI.FIT.Areas.SubjectManager.Models.Entity.Module>
+
+<div class="bg_title_category">
+<a href="#hoc-phan" id="tab-1">HỌC PHẦN</a>
+    @Resources.Resource.Module
+</div>
+
+@foreach (var item in Model)
+{
+  
+    <a href="@Url.Action("index", "subject", new { us = item.ID })" class="cate_link">
+        <h4 class="cate_item">@item.Name</h4>
+    </a>
+<div class="line"></div>
+}

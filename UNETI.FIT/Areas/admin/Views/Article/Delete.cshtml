@@ -1,0 +1,28 @@
+﻿@model UNETI.FIT.Models.ViewModels.ArticleViewModel
+
+@{
+    ViewBag.Title = Resources.Resource.Delete;
+}
+
+
+@section navbar{
+    <li>@Html.ActionLink(Resources.Resource.ListNewsManager, "index")</li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h2 class="box-title">@Model.Title</h2>
+    </div>
+    <div class="box-body">
+        @Html.DisplayForModel()
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p class="box-footer">
+            <input type="submit" class="btn btn-danger" value="Delete" />
+            @Html.ActionLink(@Resources.Resource.Return, "index")
+        </p>
+    }
+</div>

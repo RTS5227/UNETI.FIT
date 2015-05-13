@@ -1,0 +1,8 @@
+﻿@model int
+
+@{
+    var db = new UNETI.FIT.Infrastructure.Concrete.CategoryRepository();
+    string name = db.GetByID(Model).Name;
+}
+
+@name

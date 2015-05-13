@@ -1,0 +1,37 @@
+﻿<section id="sidebar" class="col-lg-3 sidebar-offcanvas">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @{
+            Html.RenderAction("Announcement", "Home", new { area="", type = UNETI.FIT.Models.Entity.CategoryTypeEnum.Announcement });
+        }
+
+    </div>
+
+    <div class="widget">
+        @{
+            <h4>Ban quản trị</h4>
+            //Html.RenderAction("Admins", "Home");
+        }
+    </div>
+    @*<div class="widget">
+                                @{
+                                    <h4>Thành viên mới nhất</h4>
+                                    Html.RenderAction("Members", "Home");
+                                }
+                            </div>*@
+    <div class="widget widget-thongke">
+        <h4>Thống kê</h4>
+        @RenderPage("~/Views/Shared/_Counter.cshtml")
+    </div>
+    <div class="widget">
+        <h4>Facebook</h4>
+        @*<img src="~/Images/fblikebox.PNG">*@
+        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FCNTTUNETI&amp;width=266&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 266px; height: 290px;" allowtransparency="true"></iframe>
+
+    </div>
+    <div class="widget">
+        <h4>Google Maps</h4>
+        @*<img src="~/Images/map.png">*@
+        <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1869.4244051473092!2d106.17169419740291!3d20.430302000213082!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1418310509386" width="266" height="300" frameborder="0" style="border: 0"></iframe>
+    </div>
+</section>
+<!--/.sidebar-offcanvas-->

@@ -1,0 +1,39 @@
+﻿@model UNETI.FIT.Models.ViewModels.FilterModel
+@{
+    string ActionName = ViewContext.RouteData.GetRequiredString("action");
+    string clf = "", cll = "";
+    string q = Request.Params["q"];
+
+    if (Model.PageIndex == Model.TotalPages)
+    {
+        cll = "disabled";
+    }
+    if (Model.PageIndex == 1)
+    {
+        clf = "disabled";
+    }
+}
+
+<nav>
+<ul class="pager pagination">
+        <li class="@clf">@Html.ActionLink(" ", ActionName, new { q = q, page = Model.PageIndex - 1 })</li>
+		
+		<ul class="ul2">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (i == Model.PageIndex)
+            {
+            <li class="active">@Html.ActionLink(i + "", ActionName, new { q = q, page = i })</li>
+            }
+            else
+            {
+            <li>@Html.ActionLink(i + "", ActionName, new { q = q, page = i })</li>
+            }
+        }
+		
+		
+        <li class="@cll">@Html.ActionLink("Trang cuối", ActionName, new { q = q, page = Model.PageIndex + 1 })</li>
+		</ul>
+        <li class="@cll">@Html.ActionLink(" ", ActionName, new { q = q, page = Model.TotalPages })</li>
+    </ul>
+</nav>

@@ -1,0 +1,5 @@
+﻿@model string
+
+<input type="file" data-type="Attachment" />
+@Html.TextBoxFor(m => m, new { style = "display: none" })
+@Scripts.Render("~/bundles/saber")

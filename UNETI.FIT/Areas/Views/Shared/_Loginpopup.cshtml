@@ -1,0 +1,23 @@
+﻿@model UNETI.FIT.Models.ViewModels.LoginModel
+
+
+    <div class="login2">
+        @using (Html.BeginForm("login", "account", new { area = "" }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = @Resources.Resource.Nickname, @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(m => m.Password, new { placeholder = @Resources.Resource.Password, @class = "form-control" })
+            </div>
+        
+            <div class="form-options clear">
+				<input type="submit" class="nutdn" value="Đăng Nhập">
+				
+			</div>
+        }
+    </div>
+

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<UNETI.FIT.Areas.SubjectManager.Models.Entity.Subject>
+
+<ul id="top-subject">
+    <li class="bg_title_top">
+        <a name="top-do-an" id="tab-2">TOP ĐỒ ÁN</a>
+        @Resources.Resource.TopSubject
+    </li>
+
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="top_item clearfix">
+                <a href="@Url.Action("chitiet", "subject", new { id = item.ID })">
+                    <div class="anhtopdoan">
+                        <img src="/content/upload/@item.Thumbnail" alt="" title="" class="top_img">
+                    </div>
+                </a>
+                <a href="@Url.Action("chitiet", "subject", new { id = item.ID })" class="top_title_link clearfix">
+                    <h3 class="top_title">@item.Title</h3>
+                </a>
+                <div class="clear"></div>
+                <div>
+                    <a href="?us=" class="top_cate">@item.Module.Name</a>
+                    <span class="top_view">@item.View </span>
+                </div>
+            </div>
+        </li>
+    }
+    <li class="top_viewall">
+        <a href="#" class="link_bullet_next">@Resources.Resource.ViewMore</a>
+    </li>
+</ul>

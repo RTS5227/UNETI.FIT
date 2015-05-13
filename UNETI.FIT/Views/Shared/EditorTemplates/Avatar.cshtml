@@ -1,0 +1,8 @@
+﻿@model string
+
+<label for="uploadInput">
+    <img src="/content/upload/@Model"  width="140" height="140" class="img-thumbnail avatar" title="Click để upload ảnh đại diện" />
+</label>
+<input type="file" id="uploadInput" style="display: none" />
+@Html.TextBoxFor(m => m, new { id = "result", style = "display: none" })
+@Scripts.Render("~/bundles/saber")

@@ -1,0 +1,8 @@
+﻿@model int
+
+@{
+    var db = new UNETI.FIT.Infrastructure.ApplicationDBContext();        
+    var list = new SelectList(db.Faculties.ToList(), "ID", "Name", Model);
+}
+
+@Html.DropDownListFor(m => m, list)

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<UNETI.FIT.Models.ViewModels.AssignedTagData>
+
+@foreach (var item in Model)
+{
+    <span>
+        @Html.HiddenFor(model => item.TagID)
+        @Html.CheckBoxFor(model => item.Assigned)
+        @Html.DisplayFor(model => item.TagDescription)
+    </span>
+}

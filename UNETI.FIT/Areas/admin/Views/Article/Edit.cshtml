@@ -1,0 +1,36 @@
+﻿@model UNETI.FIT.Models.ViewModels.ArticleViewModel
+
+@{
+    ViewBag.Title = Resources.Resource.Edit;
+}
+
+@section navbar{
+    <li>@Html.ActionLink(Resources.Resource.ListNewsManager, "index")</li>
+    <li class="active">@ViewBag.Title</li>
+}
+
+<div class="box box-primary">
+    <div class="box-header">
+        <h2 class="box-title">@Model.Title</h2>
+    </div>
+        @using (Html.BeginForm("Edit", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend></legend>
+
+                <div class="box-body">
+                    @Html.EditorForModel()
+                </div>
+
+                <p class="box-footer">
+                    <input type="submit" class="btn btn-primary" value="@Resources.Resource.Edit" />
+                </p>
+            </fieldset>
+        }
+    </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

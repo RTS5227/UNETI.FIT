@@ -1,0 +1,8 @@
+﻿@model string
+
+@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+@Html.TextAreaFor(model => model, new { id = "Content" })
+@Html.ValidationMessageFor(model => model)
+<script>
+    CKEDITOR.replace("Content");
+</script>

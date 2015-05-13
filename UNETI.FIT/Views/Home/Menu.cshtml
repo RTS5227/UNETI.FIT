@@ -1,0 +1,12 @@
+﻿@model IEnumerable<string>
+
+<ul class="nav navbar-nav" id="navScroll">
+    <li>@Html.ActionLink(@Resources.Resource.Home, "Index", "Home")</li>
+    @foreach (string s in Model)
+    { 
+        <li><a href="#@s">@Resources.Resource.ResourceManager.GetString(s)</a></li>
+    }
+    <li>@Html.ActionLink(Resources.Resource.About, "About", "Home")</li>
+    <li>@Html.ActionLink(Resources.Resource.Contact, "Contact", "Home")</li>
+    <li><a href="@Url.Action("index","subject", new { area = "SubjectManager" })">@Resources.Resource.SubjectRegister</a></li>
+</ul>

@@ -1,0 +1,17 @@
+﻿@model UNETI.FIT.Areas.qlda.Models.Entity.Report
+@{
+    string disabled = User.IsInRole("student") ? "" : "disabled";
+}
+@using (Html.BeginForm("BaoCao", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend></legend>
+
+        @Html.EditorForModel()
+        <br />
+        <div class="form-group">
+            <input class="btn btn-default" type="submit" @disabled value="@Resources.Resource.Send" />
+        </div>
+    </fieldset>
+}

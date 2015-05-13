@@ -1,0 +1,14 @@
+﻿@model string
+@{
+    var db = new UNETI.FIT.Infrastructure.ApplicationDBContext();
+    var list = new SelectList(db.Teachers.ToList(), "ID", "FullName", Model);
+}
+
+@if (User.IsInRole("admin"))
+{
+    @Html.DropDownListFor(m => m, list)
+}
+else
+{
+    @Html.DropDownListFor(m => m, list, new { disabled = "true" })
+}

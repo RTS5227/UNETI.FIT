@@ -1,0 +1,27 @@
+﻿@using UNETI.FIT.Areas.SubjectManager.Models.Entity
+@model Subject
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<div id="blsd">
+<div id="blsd_padding">
+<div>
+    @{
+        Html.RenderPartial("_TableSubject", Model);
+    }
+</div>
+ <div id="baocaowg" class="widget">
+		<div class="clwbc">
+        <h3>@Resources.Resource.ReportProgress</h3>
+        @{
+            Html.RenderPartial("BaoCao", new Report { SubjectID = Model.ID, CreateAt = DateTime.Now });
+		}	
+		</div>	
+		@{
+			<h3 style="margin-top:50px">Danh sách báo cáo</h3>
+            Html.RenderAction("DSBC", new { id = Model.ID });
+        }
+    </div>
+</div>
+</div>

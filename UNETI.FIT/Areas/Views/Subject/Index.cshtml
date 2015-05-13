@@ -1,0 +1,116 @@
+﻿@model UNETI.FIT.Models.ViewModels.ListViewModelBase<UNETI.FIT.Areas.qlda.Models.Entity.Subject>
+
+@{
+    ViewBag.Title = Resources.Resource.ListOfSubject;
+}
+
+<div id="blsd">
+    <div class="title_path">
+        <h3 class="tileh3">@Resources.Resource.Subject</h3>
+    
+	
+        @using (Html.BeginForm("index", "subject", FormMethod.Get))
+        {
+            
+			
+			
+			
+            <div class="option_sort">
+                
+                <span class="select_label">
+                    <select name="sort" onchange="this.form.submit()" style="width: 180px;">
+                        <option selected="selected" value="name">Sắp xếp</option>
+                        <option value="date">@Resources.Resource.MostNew</option>
+                        <option value="view">@Resources.Resource.MostView</option>
+                        <option value="register">@Resources.Resource.MostRegister</option>
+                    </select>
+                </span>
+            </div>
+        }
+    </div>
+
+    <div class="grid_box">
+        <!--Phan Trang-->
+        
+		
+		
+		
+		
+
+        @foreach (var item in Model.List)
+        {
+        
+            <div class="grid_base_item">
+
+			
+                    <a href="@Url.Action("chitiet", "Subject", new { id = item.ID })">
+					<div class="anhdoan">
+						<img src="/content/upload/@item.Thumbnail" title="@item.Title" class="grid_base_img"/>
+					</div>
+                    </a>
+					
+					
+					
+					
+                 <a href="@Url.Action("chitiet", "Subject", new { id = item.ID })" class="grid_base_title_link">
+                        <h2 class="grid_base_title">@item.Title</h2>
+                    </a>
+					
+                <div class="grid_base_info clearfix">
+                   
+				   
+				   
+				   
+                    <ul class="grid_detail_col1 clearfix">
+                        <li>
+                            <span class="detail-left">@Resources.Resource.Module: </span>
+                            @Html.ActionLink(item.Module.Name, "Index", new { us = item.ModuleID })
+                        </li>
+                        <li>
+                            <span class="detail-left">@Resources.Resource.Teacher:</span>
+                            @Html.ActionLink(item.Teacher.FullName, "Index", new { us = item.TeacherID })
+                        </li>
+                        <li>
+                            <span class="detail-left">@Resources.Resource.Status: </span>
+                            <span style="color:#babcbc">@item.Status.ToString()</span>
+                        </li>
+                    </ul>
+                    <ul class="grid_detail_col2 clearfix">
+                        <li>
+                            <span class="detail-left">@Resources.Resource.StartAt: </span>
+                            <span style="color:#babcbc">@item.StartAt.ToShortDateString()</span>
+                        </li>
+                        <li>
+                            <span class="detail-left">@Resources.Resource.EndAt: </span>
+                            <span style="color:#babcbc">@item.EndAt.ToShortDateString()</span>
+                        </li>
+                        <li>
+                            <span class="detail-left">@Resources.Resource.View: </span>
+                            <span style="color:#babcbc">@item.View</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+
+        
+        
+		
+		
+		
+		
+    </div>
+
+    <div class="clear"></div>
+    <br>
+
+
+ 
+    <div class="clear"></div>
+<!--Phan Trang-->
+        @{
+            Html.RenderPartial("_Pagination", Model.Filter);
+        }
+        <!--END Phan Trang-->
+</div>
+

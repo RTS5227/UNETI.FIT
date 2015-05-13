@@ -1,0 +1,7 @@
+﻿@using UNETI.FIT.Models.ViewModels
+<select name="rp" onchange="this.form.submit()">
+    <option selected value="@ReportEnum.Article">@Resources.Resource.News</option>
+    <option value="@ReportEnum.Student">@Resources.Resource.Student</option>
+    <option value="@ReportEnum.Teacher">@Resources.Resource.Teacher</option>
+    <option value="@ReportEnum.Subject">@Resources.Resource.Subject</option>
+</select>

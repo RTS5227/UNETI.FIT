@@ -1,0 +1,33 @@
+﻿@model UNETI.FIT.Areas.qlda.Models.Entity.Subject
+<div id="blsd">
+<div id="blsd_padding">
+<div class="dangdoanmoi">
+<h3>ĐĂNG ĐỒ ÁN MỚI</h3>
+@{
+    ViewBag.Title = Resources.Resource.Create;
+}
+
+@using (Html.BeginForm("Them", "Subject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Resources.Resource.Subject</legend>
+        @Html.EditorForModel()
+        <div>
+            <input type="submit" value="@Resources.Resource.Save" />
+        </div>
+    </fieldset>
+}
+
+<div>
+<div class="trolaict">
+    @Html.ActionLink(@Resources.Resource.Return, "index")
+	</div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+</div>
+</div></div>

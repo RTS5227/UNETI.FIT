@@ -1,0 +1,35 @@
+﻿@using UNETI.FIT.Areas.SubjectManager.Models.Entity
+@model Teacher
+
+@{
+    ViewBag.Title = Resources.Resource.Create;
+}
+
+@section navbar{
+    <li>@Html.ActionLink(Resources.Resource.ListTeacherManager, "index")</li>
+    <li class="active">@ViewBag.Title</li>
+}
+<div class="box box-primary">
+    <div class="box-header">
+        <h2 class="box-title"></h2>
+    </div>
+    @using (Html.BeginForm("create", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend></legend>
+
+            <div class="box-body">
+                @Html.EditorForModel()
+            </div>
+
+            <p class="box-footer">
+                <input type="submit" class="btn btn-primary" value="@Resources.Resource.Create" />
+            </p>
+        </fieldset>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,27 @@
+﻿@using UNETI.FIT.Areas.SubjectManager.Models.Entity;
+@model IEnumerable<Confirm>
+@{
+    bool IsTeacherAndWait = false;
+}
+@if (Model.Count() > 0)
+{
+    <tr class="trdssvbc">
+        <td class="tddssvbc">
+            <ul class="dssvtg">
+                @foreach (var item in Model)
+                {
+                    <li class="profile">
+                        <a href="@Url.Action("index", "student", new { id = User.Identity.Name })">
+                            <div class="avatar">
+                                <img width="50" height="50" 
+                        src="/content/upload/@item.Student.Avatar" 
+                        class="img-circle"
+                        title="@item.Student.FullName" />
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </td>
+    </tr>
+}

@@ -1,0 +1,55 @@
+﻿@model UNETI.FIT.Models.ViewModels.LoginModel
+
+@{
+    ViewBag.Title = Resources.Resource.Login;
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" class="bg-black">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - @Resources.Resource.UNETI</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/admin/bootstrap.min.css")
+    @Styles.Render("~/Content/admin/font-awesome.min.css")
+    @Styles.Render("~/Content/admin/AdminLTE.css")
+</head>
+<body class="bg-black">
+    <div class="form-box" id="login-box">
+        <div class="header">@Resources.Resource.Login</div>
+        <section id="loginForm">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "User ID" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="form-group">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        <span>@Resources.Resource.RememberMe</span>
+                    </div>
+                </div>
+                <div class="footer">
+                    <input type="submit" class="btn bg-olive btn-block" value="@Resources.Resource.Login" />
+
+                    <p><a href="#forgot.html">I forgot my password</a></p>
+                    <a href="#register.html" class="text-center">Register a new membership</a>
+                </div>
+            }
+        </section>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/admin/bootstrap.min.js")
+</body>
+</html>

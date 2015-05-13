@@ -1,0 +1,16 @@
+﻿@model string[]
+
+<ul class="list-group">
+    @if (Model.Length > 0)
+    { 
+        @foreach (string item in Model)
+        {
+            <li class="profile list-group-item">
+            <a href="@Url.Action("Details", "Account", new { u = item })">
+                <img class="avatar" src="~/Images/admin.jpg" />
+                <span class="username">@item</span>
+            </a>
+        </li>
+        }
+    }
+</ul>

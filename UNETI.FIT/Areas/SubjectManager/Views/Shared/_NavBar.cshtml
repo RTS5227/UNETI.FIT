@@ -1,0 +1,22 @@
+﻿<div>
+    <ul class="menubenphai">
+        @if (User.IsInRole("student"))
+        {
+            Html.RenderAction("StudentCP", "subject");
+        }
+        else if (User.IsInRole("teacher"))
+        {
+            Html.RenderAction("TeacherCP", "subject");
+        }
+        else if (User.IsInRole("admin"))
+        {
+            <li>
+                <a class="username" href="/admin">@User.Identity.Name</a>
+            </li>
+        }
+        else if (!User.Identity.IsAuthenticated)
+        {
+            <li class="login"><a class="login-window" href="#login-box">Đăng Nhập</a></li>
+        }
+    </ul>
+</div>

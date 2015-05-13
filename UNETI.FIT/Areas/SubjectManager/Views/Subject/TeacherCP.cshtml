@@ -1,0 +1,75 @@
+﻿@model UNETI.FIT.Areas.SubjectManager.Models.Entity.TeacherCPModel
+
+@{
+    string active = "";
+}
+<li id="liusername">
+    <input class="hidden" id="dropdown-user" type="checkbox" />
+    <label for="dropdown-user" class="username">
+        <img src="/content/upload/@Model.Teacher.Avatar" />
+        <strong>@Model.Teacher.FullName</strong>
+    </label>
+    <ul class="dropdown-menu dropdown-menu-right" style="width: 300px">
+        <li class="userprofile clearfix">
+            <a href="@Url.Action("index", "student", new { id = User.Identity.Name })">
+                <img src="/content/upload/@Model.Teacher.Avatar" />
+                <h2>@Model.Teacher.FullName</h2>
+                <h3>@Resources.Resource.Teacher</h3>
+            </a>
+        </li>
+        <li class="anhviet clearfix">
+            <a class="viet" href="@Url.Action("ChangeLanguage", "subject", new { culture = "vi-VN" })">
+                <img src="/images/VN.png" width="30px" height="20px" /></a>
+            <a class="anh" href="@Url.Action("ChangeLanguage", "subject", new { culture = "en-US" })">
+                <img src="/images/EN.png" width="30px" height="20px" /></a>
+            <div class="thoat">
+                @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <span class="glyphicon glyphicon-off"></span>
+                    </a>
+                }
+            </div>
+        </li>
+    </ul>
+</li>
+<li class="dropdown" id="messager">
+    <input type="checkbox" id="dropdown-messager" class="hidden" />
+    <label for="dropdown-messager">
+        <span class="glyphicon glyphicon-comment"></span>
+        <span class="label label-success" id="ms-count">@Model.Confirms.Count()</span>
+    </label>
+    <ul class="dropdown-menu dropdown-menu-right" style="width: 350px;">
+        <li class="header">You have <span>@Model.Confirms.Count()</span> new messager</li>
+        <li>
+            <ul class="menu" style="overflow: scroll; width: 100%; max-height: 300px; overflow-x: hidden;">
+               @foreach (var item in Model.Confirms)
+                {
+                    <li>
+                        <!-- start message -->
+                        <div class="tinnhan clearfix">
+                            <div class="messager-wrapper pull-left clearfix">
+                                <div class="pull-left">
+                                    <img src="/content/upload/@item.Student.Avatar" class="img-round" width="45" height="45">
+                                </div>
+                                <h4>@item.Student.FullName</h4>
+                                <p>@item.Student.FullName đã yêu cầu tham gia đồ án @item.Subject.Title vào ngày @item.CreateAt.ToShortDateString()</p>
+                            </div>
+                            <div class="btn-xacnhan pull-right clearfix">
+                                @Html.ActionLink(@Resources.Resource.Accept, "Accept", new { id = item.ID })
+                                @Html.ActionLink(@Resources.Resource.Deny, "Deny", new { id = item.ID })
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+</li>
+<li class="ntk">
+    @using (Html.BeginForm("index", "subject", FormMethod.Get))
+    {
+        <input type="search" name="kw" autocomplete="off" placeholder="Tìm kiếm đồ án" />
+    }
+</li>

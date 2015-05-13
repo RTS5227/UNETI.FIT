@@ -1,0 +1,7 @@
+﻿@model int
+@{
+    var repo = new UNETI.FIT.Infrastructure.Concrete.CategoryRepository();
+    var list = new SelectList(repo.GetAll().ToList(), "ID", "Name", Model);
+}
+
+@Html.DropDownListFor(m => m, list)

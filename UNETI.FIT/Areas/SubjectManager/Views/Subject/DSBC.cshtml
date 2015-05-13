@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UNETI.FIT.Areas.SubjectManager.Models.Entity.Report>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="panel panel-default">
+            <header class="panel-heading clearfix">
+                <div class="pull-left">
+                    <strong>@item.Student.FullName</strong>
+                     - @item.CreateAt.ToShortDateString()
+                </div>
+                <div class="pull-right">
+                    @{Html.RenderPartial("_Progress", item);}
+                </div>
+            </header>
+            <section class="panel-body">
+                <p>
+                    @Html.DisplayFor(a => item.Content)
+                </p>
+            </section>
+            @if (item.Attachment != null)
+            {
+                <footer class="panel-footer"><div class="ghtdkht">@Html.DisplayFor(m => item.Attachment)</div></footer>
+            }
+        </li>
+    }
+</ul>
+
+@*<li class="baocao list-group-item">
+            <header>
+                @{Html.RenderPartial("_Progress", item);}
+            </header>
+            <section>
+                @item.Student.FullName - @item.CreateAt.ToShortDateString()
+                <p>
+                    @Html.DisplayFor(a => item.Content)
+                </p>
+            </section>
+            <footer>@Html.DisplayFor(m => item.Attachment)</footer>
+        </li>*@
