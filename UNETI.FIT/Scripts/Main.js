@@ -12,6 +12,7 @@
             processData: false,
             success: function (data) {
                 // do something
+                data = data.replace(/(<)(.|\n)*/gmi, '').trim();
                 if (typeof (data) == "string" && data.length > 0) {
                     var result;
                     if (typeof (type) == 'string' && data.length > 0) {

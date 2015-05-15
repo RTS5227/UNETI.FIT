@@ -16,6 +16,7 @@ using UNETI.FIT.Infrastructure.Helper;
 using UNETI.FIT.Areas.SubjectManager.Infrastructure.Helpers;
 using System.IO;
 using System.Configuration;
+using UNETI.FIT.Infrastructure;
 
 namespace UNETI.FIT.Areas.admin.Controllers
 {
@@ -23,10 +24,12 @@ namespace UNETI.FIT.Areas.admin.Controllers
     public class TeacherController : Controller
     {
         private ITeacherRepository teacherRepository;
+        private ISubjectRepository subjectRepository;
 
-        public TeacherController(ITeacherRepository repo)
+        public TeacherController(ITeacherRepository repo, ISubjectRepository repo2)
         {
             teacherRepository = repo;
+            subjectRepository = repo2;
         }
 
         //
@@ -92,11 +95,12 @@ namespace UNETI.FIT.Areas.admin.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             var model = teacherRepository.GetByID(id);
             if (model != null)
             {
+                subjectRepository.DeleteMany(a => a.TeacherID == model.ID);
                 teacherRepository.Delete(model);
                 TempData["message"] = string.Format("{0} đã được xóa thành công.", model.FullName);
             }

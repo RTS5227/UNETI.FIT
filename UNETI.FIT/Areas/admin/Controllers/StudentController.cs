@@ -102,7 +102,7 @@ namespace UNETI.FIT.Areas.admin.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             var model = studentRepository.GetByID(id);
             if (model != null)

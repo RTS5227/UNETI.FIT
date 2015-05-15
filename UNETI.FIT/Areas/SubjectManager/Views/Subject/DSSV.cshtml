@@ -11,7 +11,7 @@
                 @foreach (var item in Model)
                 {
                     <li class="profile">
-                        <a href="@Url.Action("index", "student", new { id = User.Identity.Name })">
+                        <a href="@Url.Action("index", "student", new { id = item.StudentID })">
                             <div class="avatar">
                                 <img width="50" height="50" 
                         src="/content/upload/@item.Student.Avatar" 

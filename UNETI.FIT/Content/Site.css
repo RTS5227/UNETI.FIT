@@ -913,9 +913,13 @@ ul#navScroll a:hover {
     .jum .news {
         position: absolute;
         z-index: 999;
-        background: rgba(255,255,255,0.8);
+        background: rgba(0,0,0,0.6);
         width: 100%;
         bottom: 0;
+    }
+
+    .jum .news a{
+        color: white;
         padding: 0 10px;
     }
 
@@ -950,6 +954,7 @@ clear: both;
   font-weight: bold;
   margin-top: 0px;
   border-left: 4px solid #c20000;
+  border-bottom: 1px solid #c20000;
 }
 
 .line {

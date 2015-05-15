@@ -22,14 +22,16 @@ using UNETI.FIT.Infrastructure;
 
 namespace UNETI.FIT.Areas.admin.Controllers
 {
-    [Authorize(Roles="admin")]
+    [Authorize(Roles = "admin")]
     public class SubjectController : Controller
     {
         private ISubjectRepository subjectRepository;
+        private IConfirmRepository confirmRepository;
 
-        public SubjectController(ISubjectRepository isr)
+        public SubjectController(ISubjectRepository isr, IConfirmRepository confirms)
         {
             subjectRepository = isr;
+            confirmRepository = confirms;
         }
 
         //
@@ -108,6 +110,7 @@ namespace UNETI.FIT.Areas.admin.Controllers
             Subject model = subjectRepository.GetByID(id);
             if (model != null)
             {
+                confirmRepository.DeleteMany(a => a.SubjectID == id);
                 subjectRepository.Delete(model);
                 TempData["message"] = string.Format("{0} đã được xóa thành công.", model.Title);
             }

@@ -118,21 +118,34 @@ namespace UNETI.FIT.Areas.SubjectManager.Controllers
         }
 
         #region Message
-        //Render danh sach tin nhan cho sv
-        [Authorize(Roles = "student")]
-        public ActionResult Message()
+
+        [Authorize(Roles = "teacher")]
+        public ActionResult TeacherCP()
         {
-            var result = new List<Message>();
+            var result = new TeacherCPModel();
             int limit = 10;
-            result = messageRepository
+            result.Teacher = teacherRepository.GetByID(User.Identity.Name);
+            result.Confirms = confirmRepository
+                .GetMany(c => c.Subject.TeacherID == User.Identity.Name && c.Content == ConfirmEnum.Wait)
+                .OrderByDescending(m => m.CreateAt)
+                .Take(limit)
+                .ToList();
+            return PartialView(result);
+        }
+
+        [Authorize(Roles = "student")]
+        public ActionResult StudentCP()
+        {
+            var result = new StudentCPModel();
+            int limit = 10;
+            result.Student = studentRepository.GetByID(User.Identity.Name);
+            result.Messages = messageRepository
                 .GetMany(m => m.StudentID == User.Identity.Name)
                 .OrderBy(m => m.IsReaded)
                 .Take(limit)
-                .ToList();
-            result.ForEach(a => a.Teacher = teacherRepository.GetByID(a.TeacherID));
-            result = result
                 .OrderByDescending(m => m.CreateAt)
                 .ToList();
+            result.Messages.ForEach(a => a.Teacher = teacherRepository.GetByID(a.TeacherID));
             return PartialView(result);
         }
 
@@ -192,8 +205,16 @@ namespace UNETI.FIT.Areas.SubjectManager.Controllers
             int reportID = id;
             var entry = reportRepository.GetByID(reportID);
             if (entry == null) return HttpNotFound();
-            entry.Progress = progress;
-            reportRepository.Update(entry);
+            var subject = subjectRepository.GetByID(entry.SubjectID);
+            if (subject.TeacherID == User.Identity.Name)
+            {
+                entry.Progress = progress;
+                reportRepository.Update(entry);
+            }
+            else
+            {
+                TempData["message"] = "Bạn không thể thực hiện chức năng này";
+            }
             return RedirectToChiTiet(entry.SubjectID);
         }
 
@@ -394,35 +415,6 @@ namespace UNETI.FIT.Areas.SubjectManager.Controllers
 
         #endregion
 
-        [Authorize(Roles = "student")]
-        public ActionResult StudentCP()
-        {
-            var result = new StudentCPModel();
-            int limit = 10;
-            result.Student = studentRepository.GetByID(User.Identity.Name);
-            result.Messages = messageRepository
-                .GetMany(m => m.StudentID == User.Identity.Name)
-                .OrderBy(m => m.IsReaded)
-                .Take(limit)
-                .OrderByDescending(m => m.CreateAt)
-                .ToList();
-            result.Messages.ForEach(a => a.Teacher = teacherRepository.GetByID(a.TeacherID));
-            return PartialView(result);
-        }
-
-        [Authorize(Roles = "teacher")]
-        public ActionResult TeacherCP()
-        {
-            var result = new TeacherCPModel();
-            int limit = 10;
-            result.Teacher = teacherRepository.GetByID(User.Identity.Name);
-            result.Confirms = confirmRepository
-                .GetMany(c => c.Subject.TeacherID == User.Identity.Name && c.Content == ConfirmEnum.Wait)
-                .OrderByDescending(m => m.CreateAt)
-                .Take(limit)
-                .ToList();
-            return PartialView(result);
-        }
 
         private ActionResult RedirectToChiTiet(int id)
         {

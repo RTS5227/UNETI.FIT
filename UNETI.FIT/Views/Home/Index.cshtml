@@ -20,10 +20,7 @@
 
         <div class="news">
             <div class="txtnews">
-                <h4><a href="@Url.Action("details", "home", new { id = Model.ID })">@Model.Title</a></h4>
-                <p>
-                    @Saber.Truncate(Model.Content, 200)
-                </p>
+                <h4 style="padding:5px 0;"><a href="@Url.Action("details", "home", new { id = Model.ID })">@Model.Title</a></h4>
             </div>
         </div>
         <div class="directionNav">

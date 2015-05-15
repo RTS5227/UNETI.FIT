@@ -11,7 +11,7 @@
     </label>
     <ul class="dropdown-menu dropdown-menu-right" style="width: 300px">
         <li class="userprofile clearfix">
-            <a href="@Url.Action("index", "student", new { id = User.Identity.Name })">
+            <a href="@Url.Action("index", "teacher", new { id = User.Identity.Name })">
                 <img src="/content/upload/@Model.Teacher.Avatar" />
                 <h2>@Model.Teacher.FullName</h2>
                 <h3>@Resources.Resource.Teacher</h3>
