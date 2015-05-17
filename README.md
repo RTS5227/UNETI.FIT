@@ -37,4 +37,4 @@ Với các chức năng cơ bản Thêm, Sửa, Xóa và Export 2 Excel
 - Nguyễn Văn Đức (Tester)
 
 ### License
-UNETI.FIT  is licensed under the MIT License - see the `LICENSE` file for details
+UNETI.FIT  is licensed under the GNU License - see the `LICENSE` file for details
