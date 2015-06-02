@@ -36,5 +36,3 @@ Với các chức năng cơ bản Thêm, Sửa, Xóa và Export 2 Excel
 - Minh Ki Đông (Designer)
 - Nguyễn Văn Đức (Tester)
 
-### License
-UNETI.FIT  is licensed under the GNU License - see the `LICENSE` file for details
