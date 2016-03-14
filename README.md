@@ -31,8 +31,3 @@ Với các chức năng cơ bản Thêm, Sửa, Xóa và Export 2 Excel
 - SQL Server 2008
 - HTML, CSS, Javascript
 
-### Thành viên tham gia phát triển
-- Lương Thanh Lâm (Team Leader, Web Developer)
-- Minh Ki Đông (Designer)
-- Nguyễn Văn Đức (Tester)
-
